@@ -7,40 +7,26 @@ public class ReadWriteFile {
 
     public static final String PATHNAME = "product.txt";
 
-    public static void writeFile(List<Product> products){
-        File a = new File(PATHNAME);
-        try {
-            OutputStream outputStream = new FileOutputStream(a);
-            ObjectOutputStream oos =  new ObjectOutputStream(outputStream);
+    public static void writeFile(List<Product> products) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATHNAME))) {
             oos.writeObject(products);
-            oos.close();
-            outputStream.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.err.println("Không tìm thấy file: " + e.getMessage());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Lỗi khi ghi vào file: " + e.getMessage());
         }
     }
 
-
-    public static List<Product> readFile(){
-        File a = new File(PATHNAME);
-        try {
-            InputStream is = new FileInputStream(a);
-            ObjectInputStream ois = new ObjectInputStream(is);
-            Object object = ois.readObject();
-            return (List<Product>) object;
+    public static List<Product> readFile() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATHNAME))) {
+            return (List<Product>) ois.readObject();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.err.println("Không tìm thấy file: " + e.getMessage());
+            throw new RuntimeException("Không tìm thấy file", e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.err.println("Lỗi ghi file" + e.getMessage());
+            throw new RuntimeException("Lỗi ghi vào file", e);
         }
     }
-
-//    public static void main(String[] args) {
-//        List<Product> l = readFile();
-//        System.out.println(l);
-//    }
 }
+
