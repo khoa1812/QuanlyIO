@@ -33,7 +33,7 @@ public class ReadWriteFile {
         List<Product> defaultProducts = new ArrayList<>();
         defaultProducts.add(new Product("01", "Duy", 1000, "Hãng Samsung", "Chạy chậm, đơ lác"));
         defaultProducts.add(new Product("02", "Hieu", 2000, "Hãng Apple", "Gầy ốm"));
-        defaultProducts.add(new Product("03", "Quan", 3000, "Hãng Dell", "Chuyên gia chứng khoán"));
+        defaultProducts.add(new Product("03", "Quan", 3000, "Hãng Dell", "Nhanh mượt"));
 
         writeFile(defaultProducts);
         return defaultProducts;
