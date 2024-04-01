@@ -4,12 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadWriteFile {
+public class ReadWriteFile implements IReadWriteFile {
     public static final String PATHNAME = "product.txt";
 
-    public static List<Product> readFile() {
+    public List<Product> readFile() {
         File file = new File(PATHNAME);
-        if (!file.exists() || file.length() == 0) {
+        if (!file.exists()) {
             return getDefaultProducts();
         }
 
@@ -21,7 +21,7 @@ public class ReadWriteFile {
         }
     }
 
-    public static void writeFile(List<Product> products) {
+    public void writeFile(List<Product> products) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATHNAME))) {
             oos.writeObject(products);
         } catch (IOException e) {
@@ -29,7 +29,7 @@ public class ReadWriteFile {
         }
     }
 
-    private static List<Product> getDefaultProducts() {
+    private List<Product> getDefaultProducts() {
         List<Product> defaultProducts = new ArrayList<>();
         defaultProducts.add(new Product("01", "Duy", 1000, "Hãng Samsung", "Chạy chậm, đơ lác"));
         defaultProducts.add(new Product("02", "Hieu", 2000, "Hãng Apple", "Gầy ốm"));

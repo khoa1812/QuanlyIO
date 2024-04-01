@@ -12,6 +12,8 @@ public class Main {
             System.out.println("1. Thêm sản phẩm mới");
             System.out.println("2. Hiển thị tất cả sản phẩm");
             System.out.println("3. Tìm kiếm sản phẩm theo mã");
+            System.out.println("4. Xóa sản phẩm theo mã");
+            System.out.println("5. Sửa thông tin sản phẩm");
             System.out.println("0. Thoát");
             System.out.print("Nhập lựa chọn của bạn: ");
             choice = scanner.nextInt();
@@ -27,9 +29,19 @@ public class Main {
                     ProductManager.displayProducts();
                     break;
                 case 3:
-                    System.out.print("Nhập mã sản phẩm cần tìm: ");
+                    System.out.print("Nhập mã sản phẩm cần tìm theo id: ");
                     String productId = scanner.nextLine();
                     ProductManager.findProduct(productId);
+                    break;
+                case 4:
+                    System.out.println("Nhập mã sản phẩm cần xóa: ");
+                    String productId1 = scanner.nextLine();
+                    ProductManager.removeProduct(productId1);
+                case 5:
+                    System.out.print("Nhập mã sản phẩm cần sửa: ");
+                    String productIdToEdit = scanner.nextLine();
+                    Product updatedProduct = createNew(scanner);
+                    ProductManager.editProduct(productIdToEdit, updatedProduct);
                     break;
                 case 0:
                     System.out.println("Thoát chương trình.");
